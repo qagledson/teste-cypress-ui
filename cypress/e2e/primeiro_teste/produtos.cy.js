@@ -21,7 +21,7 @@ describe('Funcionalidade Página de Produtos', () => {
         
     });
 
-    it.only('Deve adicionar um produto ao carrinho', () => {
+    it('Deve adicionar um produto ao carrinho', () => {
         var quantidade = 10
         //- Selecionar produto
         cy.get('[class="product-block grid"]')
@@ -39,6 +39,13 @@ describe('Funcionalidade Página de Produtos', () => {
         //validações
         cy.get('.dropdown-toggle > .mini-cart-items').should('contain', quantidade)
         cy.get('.woocommerce-message').should('contain', quantidade +' × “Abominable Hoodie” foram adicionados no seu carrinho')
+    });
+
+    it.only('Deve adicionar produtos ao carrinho usando comandos customizados', () => {
+        cy.addProdutos('Abominable Hoodie', 7)
+        //validações
+        cy.get('.dropdown-toggle > .mini-cart-items').should('contain', 7)
+        cy.get('.woocommerce-message').should('contain', 7 +' × “Abominable Hoodie” foram adicionados no seu carrinho')
     });
 
 });
